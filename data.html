@@ -1,116 +1,148 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
     <title>Table and Graph</title>
   </head>
   <body>
-    <header align="center">
-      <a href="index.html"
-        ><font color="grey">Вернуться на главную страницу</font></a
-      >
-      <hr width="80%" align="center" />
+    <header>
+      <div align="center">
+        <p><b>Самые успешные Российские компании</b></p>
+        <a href="data.html"
+          ><font color="grey"
+            >Список самых успешных компаний по критериям</font
+          ></a>
+        <hr width="80%" align="center">
+      </div>
     </header>
+
     <main>
       <details>
         <summary><b>График</b></summary>
         <h4>Значение по оси OX</h4>
-        <input type="radio" name="ox" value="company" />
-        Компания<br />
-        <input type="radio" name="ox" value="city" />
-        Город<br />
-        <input type="radio" name="ox" value="year" />
-        Год основания<br />
+        <input id="ox-company" type="radio" name="ox" value="company">
+        <label for="ox-company">Тип</label><br>
+        <input id="ox-city" type="radio" name="ox" value="city">
+        <label for="ox-city">Город</label><br>
+        <input id="ox-year" type="radio" name="ox" value="year">
+        <label for="ox-year">Год основания</label><br>
         <h4>Значение по оси OY</h4>
-        <input type="checkbox" name="oy" value="revenue" />
-        Выручка<br />
-        <input type="checkbox" name="oy" value="employees" />
-        Количество сотрудников<br />
-        <input type="checkbox" name="oy" value="assets" />
-        Активы компании<br />
-        <br />
-        <input type="button" value="Построить" />
+        <input id="oy-max-revenue" type="checkbox" name="oy" value="max_revenue">
+        <label for="oy-max-revenue">Максимальная Выручка</label><br>
+        <input id="oy-min-revenue" type="checkbox" name="oy" value="min_revenue">
+        <label for="oy-min-revenue">Минимальная Выручка</label><br>
+        <input id="oy-average-revenue" type="checkbox" name="oy" value="average_revenue">
+        <label for="oy-average-revenue">Средняя Выручка</label><br>
+        <br>
+        <input id="build-chart" type="button" value="Построить">
         <p>Здесь будет график</p>
       </details>
+
       <details>
         <summary><b>Фильтр компаний</b></summary>
-        <form>
+        <form id="filter-form">
           <p>
-            Название:
-            <input type="text" name="name" size="25" />
+            <label for="filter-name">Название:</label>
+            <input id="filter-name" type="text" name="name">
           </p>
           <p>
-            Тип:
-            <select name="type">
-              <option>Все</option>
+            <label for="filter-type">Тип:</label>
+            <select id="filter-type" name="type">
+              <option value>Все</option>
               <option>Нефтегазовая компания</option>
               <option>Банк</option>
               <option>Энергетическая компания</option>
             </select>
           </p>
           <p>
-            Город:
-            <input type="text" name="city" size="20" />
+            <label for="filter-city">Город:</label>
+            <input id="filter-city" type="text" name="city">
           </p>
           <p>
-            Год основания:
-            <input type="number" name="year_from" size="8" />
+            <label for="year-from">Год основания:</label>
+            <input id="year-from" type="number" name="year_from">
             до
-            <input type="number" name="year_to" size="8" />
+            <input id="year-to" type="number" name="year_to">
           </p>
           <p>
-            Выручка, млрд руб.:
-            <input type="number" name="revenue_from" size="10" />
+            <label for="revenue-from">Выручка, млрд руб.:</label>
+            <input id="revenue-from" type="number" name="revenue_from">
             до
-            <input type="number" name="revenue_to" size="10" />
+            <input id="revenue-to" type="number" name="revenue_to">
           </p>
-          <input type="submit" value="Найти" />
-          <input type="reset" value="Очистить" />
+          <input id="find-button" type="button" value="Найти">
+          <input id="clear-button" type="button" value="Очистить">
         </form>
       </details>
       <details>
         <summary><b>Сортировка</b></summary>
-        <form>
+        <form id="sort-form">
           <p>
-            Первый уровень:
-            <select name="sort1">
-              <option>Нет</option>
-              <option>Название</option>
-              <option>Тип</option>
-              <option>Город</option>
-              <option>Год</option>
-              <option>Отрасль</option>
-              <option>Выручка</option>
-              <option>Количество сотрудников</option>
-              <option>Активы</option>
+            <label for="sort-first">Первый уровень:</label>
+            <select id="sort-first" name="sort1">
+              <option value="No">Нет</option>
+              <option value="Name">Название</option>
+              <option value="Type">Тип</option>
+              <option value="City">Город</option>
+              <option value="Year">Год</option>
+              <option value="Industry">Отрасль</option>
+              <option value="Max-Revenue">Максимальная Выручка</option>
+              <option value="Min-Revenue">Минимальная Выручка</option>
+              <option value="Average-Revenue">Средняя Выручка</option>
+              <option value="Employees">Количество сотрудников</option>
+              <option value="Assets">Активы</option>
             </select>
-            <input type="radio" name="order1" value="asc" checked /> по
-            возрастанию <input type="radio" name="order1" value="desc" /> по
-            убыванию
+            <input id="order1-asc" type="radio" name="order1" value="asc" checked>
+            по возрастанию
+            <input id="order1-desc" type="radio" name="order1" value="desc">
+            по убыванию
           </p>
           <p>
-            Второй уровень:
-            <select name="sort2">
-              <option>Нет</option>
-              <option>Название</option>
-              <option>Тип</option>
-              <option>Город</option>
-              <option>Год</option>
-              <option>Отрасль</option>
-              <option>Выручка</option>
-              <option>Количество сотрудников</option>
-              <option>Активы</option>
+            <label for="sort-second">Второй уровень:</label>
+            <select id="sort-second" name="sort2">
+              <option value="No">Нет</option>
+              <option value="Name">Название</option>
+              <option value="Type">Тип</option>
+              <option value="City">Город</option>
+              <option value="Year">Год</option>
+              <option value="Industry">Отрасль</option>
+              <option value="Max-Revenue">Максимальная Выручка</option>
+              <option value="Min-Revenue">Минимальная Выручка</option>
+              <option value="Average-Revenue">Средняя Выручка</option>
+              <option value="Employees">Количество сотрудников</option>
+              <option value="Assets">Активы</option>
             </select>
-            <input type="radio" name="order2" value="asc" /> по возрастанию
-            <input type="radio" name="order2" value="desc" /> по убыванию
+            <input id="order2-asc" type="radio" name="order2" value="asc" checked>
+            по возрастанию
+            <input id="order2-desc" type="radio" name="order2" value="desc">
+            по убыванию
           </p>
           <p>
-            <input type="submit" value="Сортировать" />
+            <label for="sort-third">Третий уровень:</label>
+            <select id="sort-third" name="sort3">
+              <option value="No">Нет</option>
+              <option value="Name">Название</option>
+              <option value="Type">Тип</option>
+              <option value="City">Город</option>
+              <option value="Year">Год</option>
+              <option value="Industry">Отрасль</option>
+              <option value="Max-Revenue">Максимальная Выручка</option>
+              <option value="Min-Revenue">Минимальная Выручка</option>
+              <option value="Average-Revenue">Средняя Выручка</option>
+              <option value="Employees">Количество сотрудников</option>
+              <option value="Assets">Активы</option>
+            </select>
+            <input id="order2-asc" type="radio" name="order2" value="asc" checked>
+            по возрастанию
+            <input id="order2-desc" type="radio" name="order2" value="desc">
+            по убыванию
+          </p>
+          <p>
+          <p>
+            <input id="sort-button" type="button" value="Сортировать">
           </p>
         </form>
       </details>
-
       <h3>Таблица компаний</h3>
       <table
         width="100%"
@@ -119,75 +151,636 @@
         cellpadding="8"
         cellspacing="0"
       >
-        <tr>
-          <th>Компания</th>
-          <th>Тип</th>
-          <th>Город</th>
-          <th>Год основания</th>
-          <th>Отрасль</th>
-          <th>Выручка, млрд руб.</th>
-          <th>Количество сотрудников</th>
-          <th>Активы, млрд руб.</th>
-        </tr>
-        <tr>
-          <td>Сургутнефтегаз</td>
-          <td>ПАО</td>
-          <td>Сургут</td>
-          <td>1993</td>
-          <td>Нефтегазовая промышленность</td>
-          <td>1 544</td>
-          <td>113 000</td>
-          <td>8 000</td>
-        </tr>
-        <tr>
-          <td>Лукойл</td>
-          <td>ПАО</td>
-          <td>Москва</td>
-          <td>1991</td>
-          <td>Нефтегазовая промышленность</td>
-          <td>3 768</td>
-          <td>100 000</td>
-          <td>12 000</td>
-        </tr>
-        <tr>
-          <td>ВТБ</td>
-          <td>ПАО</td>
-          <td>Москва</td>
-          <td>1990</td>
-          <td>Банковская деятельность</td>
-          <td>1 369</td>
-          <td>50 000</td>
-          <td>36 880</td>
-        </tr>
-        <tr>
-          <td>Газпром</td>
-          <td>ПАО</td>
-          <td>Санкт-Петербург</td>
-          <td>1989</td>
-          <td>Энергетика</td>
-          <td>10 715</td>
-          <td>500 400</td>
-          <td>30 000</td>
-        </tr>
-        <tr>
-          <td>Сбербанк</td>
-          <td>ПАО</td>
-          <td>Москва</td>
-          <td>1841</td>
-          <td>Банковская деятельность</td>
-          <td>3 381</td>
-          <td>291 795</td>
-          <td>68 815</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Компания</th>
+            <th>Тип</th>
+            <th>Город</th>
+            <th>Год основания</th>
+            <th>Отрасль</th>
+            <th>Выручка, млрд руб.</th>
+            <th>Количество сотрудников</th>
+            <th>Активы, млрд руб.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Газпром</td>
+            <td>ПАО</td>
+            <td>Санкт-Петербург</td>
+            <td>1989</td>
+            <td>Нефтегазовая промышленность</td>
+            <td>10715</td>
+            <td>479000</td>
+            <td>29000</td>
+          </tr>
+
+          <tr>
+            <td>Роснефть</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1993</td>
+            <td>Нефтегазовая промышленность</td>
+            <td>10120</td>
+            <td>345000</td>
+            <td>15900</td>
+          </tr>
+
+          <tr>
+            <td>Сбербанк</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1841</td>
+            <td>Банковская деятельность</td>
+            <td>9400</td>
+            <td>310000</td>
+            <td>53000</td>
+          </tr>
+
+          <tr>
+            <td>ЛУКОЙЛ</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1991</td>
+            <td>Нефтегазовая промышленность</td>
+            <td>6700</td>
+            <td>105000</td>
+            <td>13000</td>
+          </tr>
+
+          <tr>
+            <td>ВТБ</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1990</td>
+            <td>Банковская деятельность</td>
+            <td>4700</td>
+            <td>95000</td>
+            <td>32000</td>
+          </tr>
+
+          <tr>
+            <td>X5 Group</td>
+            <td>МКПАО</td>
+            <td>Москва</td>
+            <td>2006</td>
+            <td>Розничная торговля</td>
+            <td>3900</td>
+            <td>384000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>Ростех</td>
+            <td>Госкорпорация</td>
+            <td>Москва</td>
+            <td>2007</td>
+            <td>Промышленность</td>
+            <td>3600</td>
+            <td>800000</td>
+            <td>8000</td>
+          </tr>
+
+          <tr>
+            <td>Российские железные дороги</td>
+            <td>ОАО</td>
+            <td>Москва</td>
+            <td>2003</td>
+            <td>Транспорт</td>
+            <td>3300</td>
+            <td>700000</td>
+            <td>10000</td>
+          </tr>
+
+          <tr>
+            <td>Росатом</td>
+            <td>Госкорпорация</td>
+            <td>Москва</td>
+            <td>2007</td>
+            <td>Атомная энергетика</td>
+            <td>3000</td>
+            <td>380000</td>
+            <td>8500</td>
+          </tr>
+
+          <tr>
+            <td>Магнит</td>
+            <td>ПАО</td>
+            <td>Краснодар</td>
+            <td>1994</td>
+            <td>Розничная торговля</td>
+            <td>3000</td>
+            <td>350000</td>
+            <td>1300</td>
+          </tr>
+
+          <tr>
+            <td>Газпромбанк</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>1990</td>
+            <td>Банковская деятельность</td>
+            <td>3000</td>
+            <td>17000</td>
+            <td>13500</td>
+          </tr>
+
+          <tr>
+            <td>Татнефть</td>
+            <td>ПАО</td>
+            <td>Альметьевск</td>
+            <td>1950</td>
+            <td>Нефтегазовая промышленность</td>
+            <td>2000</td>
+            <td>45000</td>
+            <td>2100</td>
+          </tr>
+
+          <tr>
+            <td>Альфа-Банк</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>1990</td>
+            <td>Банковская деятельность</td>
+            <td>1700</td>
+            <td>30000</td>
+            <td>12000</td>
+          </tr>
+
+          <tr>
+            <td>Интер РАО</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1997</td>
+            <td>Энергетика</td>
+            <td>1500</td>
+            <td>55000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>НОВАТЭК</td>
+            <td>ПАО</td>
+            <td>Тарко-Сале</td>
+            <td>1994</td>
+            <td>Газовая промышленность</td>
+            <td>1400</td>
+            <td>15000</td>
+            <td>3700</td>
+          </tr>
+
+          <tr>
+            <td>Транснефть</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1993</td>
+            <td>Нефтяная инфраструктура</td>
+            <td>1300</td>
+            <td>120000</td>
+            <td>4500</td>
+          </tr>
+
+          <tr>
+            <td>СИБУР</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1995</td>
+            <td>Химическая промышленность</td>
+            <td>1200</td>
+            <td>55000</td>
+            <td>2900</td>
+          </tr>
+
+          <tr>
+            <td>Норникель</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1997</td>
+            <td>Цветная металлургия</td>
+            <td>1100</td>
+            <td>80000</td>
+            <td>4000</td>
+          </tr>
+
+          <tr>
+            <td>Русал</td>
+            <td>МКПАО</td>
+            <td>Калининград</td>
+            <td>2000</td>
+            <td>Цветная металлургия</td>
+            <td>1000</td>
+            <td>50000</td>
+            <td>3000</td>
+          </tr>
+
+          <tr>
+            <td>Яндекс</td>
+            <td>МКПАО</td>
+            <td>Москва</td>
+            <td>1997</td>
+            <td>Информационные технологии</td>
+            <td>1100</td>
+            <td>30000</td>
+            <td>600</td>
+          </tr>
+
+          <tr>
+            <td>НЛМК</td>
+            <td>ПАО</td>
+            <td>Липецк</td>
+            <td>1931</td>
+            <td>Чёрная металлургия</td>
+            <td>900</td>
+            <td>50000</td>
+            <td>2000</td>
+          </tr>
+
+          <tr>
+            <td>Т-Технологии</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2006</td>
+            <td>Финансовые технологии</td>
+            <td>850</td>
+            <td>50000</td>
+            <td>4500</td>
+          </tr>
+
+          <tr>
+            <td>Лента</td>
+            <td>МКПАО</td>
+            <td>Санкт-Петербург</td>
+            <td>1993</td>
+            <td>Розничная торговля</td>
+            <td>900</td>
+            <td>125000</td>
+            <td>700</td>
+          </tr>
+
+          <tr>
+            <td>Аэрофлот</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1923</td>
+            <td>Авиация</td>
+            <td>800</td>
+            <td>55000</td>
+            <td>700</td>
+          </tr>
+
+          <tr>
+            <td>Северсталь</td>
+            <td>ПАО</td>
+            <td>Череповец</td>
+            <td>1993</td>
+            <td>Чёрная металлургия</td>
+            <td>780</td>
+            <td>50000</td>
+            <td>1700</td>
+          </tr>
+
+          <tr>
+            <td>Ростелеком</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1993</td>
+            <td>Телекоммуникации</td>
+            <td>750</td>
+            <td>120000</td>
+            <td>2000</td>
+          </tr>
+
+          <tr>
+            <td>ММК</td>
+            <td>ПАО</td>
+            <td>Магнитогорск</td>
+            <td>1992</td>
+            <td>Чёрная металлургия</td>
+            <td>700</td>
+            <td>55000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>Россельхозбанк</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>2000</td>
+            <td>Банковская деятельность</td>
+            <td>700</td>
+            <td>30000</td>
+            <td>5000</td>
+          </tr>
+
+          <tr>
+            <td>Совкомбанк</td>
+            <td>ПАО</td>
+            <td>Кострома</td>
+            <td>1990</td>
+            <td>Банковская деятельность</td>
+            <td>650</td>
+            <td>25000</td>
+            <td>2000</td>
+          </tr>
+
+          <tr>
+            <td>МТС</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1993</td>
+            <td>Телекоммуникации</td>
+            <td>570</td>
+            <td>65000</td>
+            <td>1400</td>
+          </tr>
+
+          <tr>
+            <td>Полюс</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2006</td>
+            <td>Золотодобыча</td>
+            <td>570</td>
+            <td>20000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>Ozon</td>
+            <td>МКПАО</td>
+            <td>Москва</td>
+            <td>1998</td>
+            <td>Электронная торговля</td>
+            <td>616</td>
+            <td>60000</td>
+            <td>1000</td>
+          </tr>
+
+          <tr>
+            <td>РусГидро</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2004</td>
+            <td>Гидроэнергетика</td>
+            <td>550</td>
+            <td>65000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>Дом.РФ</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>1997</td>
+            <td>Финансы и недвижимость</td>
+            <td>530</td>
+            <td>10000</td>
+            <td>1500</td>
+          </tr>
+
+          <tr>
+            <td>ТМК</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2001</td>
+            <td>Металлургия</td>
+            <td>500</td>
+            <td>50000</td>
+            <td>1100</td>
+          </tr>
+
+          <tr>
+            <td>Т Плюс</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2002</td>
+            <td>Энергетика</td>
+            <td>500</td>
+            <td>50000</td>
+            <td>1000</td>
+          </tr>
+
+          <tr>
+            <td>ФосАгро</td>
+            <td>ПАО</td>
+            <td>Череповец</td>
+            <td>2001</td>
+            <td>Химическая промышленность</td>
+            <td>470</td>
+            <td>30000</td>
+            <td>1100</td>
+          </tr>
+
+          <tr>
+            <td>Трансмашхолдинг</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>2002</td>
+            <td>Машиностроение</td>
+            <td>450</td>
+            <td>100000</td>
+            <td>900</td>
+          </tr>
+
+          <tr>
+            <td>МегаФон</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2002</td>
+            <td>Телекоммуникации</td>
+            <td>450</td>
+            <td>25000</td>
+            <td>900</td>
+          </tr>
+
+          <tr>
+            <td>КАМАЗ</td>
+            <td>ПАО</td>
+            <td>Набережные Челны</td>
+            <td>1969</td>
+            <td>Автомобилестроение</td>
+            <td>430</td>
+            <td>50000</td>
+            <td>700</td>
+          </tr>
+
+          <tr>
+            <td>Мечел</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2003</td>
+            <td>Металлургия и добыча</td>
+            <td>400</td>
+            <td>50000</td>
+            <td>1000</td>
+          </tr>
+
+          <tr>
+            <td>Русагро</td>
+            <td>МКПАО</td>
+            <td>Москва</td>
+            <td>1995</td>
+            <td>Агропромышленность</td>
+            <td>390</td>
+            <td>30000</td>
+            <td>600</td>
+          </tr>
+
+          <tr>
+            <td>Самолёт</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2012</td>
+            <td>Строительство</td>
+            <td>380</td>
+            <td>30000</td>
+            <td>600</td>
+          </tr>
+
+          <tr>
+            <td>ВымпелКом</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>1992</td>
+            <td>Телекоммуникации</td>
+            <td>370</td>
+            <td>30000</td>
+            <td>700</td>
+          </tr>
+
+          <tr>
+            <td>Фикс Прайс</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2007</td>
+            <td>Розничная торговля</td>
+            <td>350</td>
+            <td>40000</td>
+            <td>500</td>
+          </tr>
+
+          <tr>
+            <td>Черкизово</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>2005</td>
+            <td>Пищевая промышленность</td>
+            <td>340</td>
+            <td>50000</td>
+            <td>500</td>
+          </tr>
+
+          <tr>
+            <td>АЛРОСА</td>
+            <td>ПАО</td>
+            <td>Мирный</td>
+            <td>1992</td>
+            <td>Алмазодобыча</td>
+            <td>330</td>
+            <td>35000</td>
+            <td>1000</td>
+          </tr>
+
+          <tr>
+            <td>Почта России</td>
+            <td>АО</td>
+            <td>Москва</td>
+            <td>2002</td>
+            <td>Почтовые услуги</td>
+            <td>320</td>
+            <td>300000</td>
+            <td>600</td>
+          </tr>
+
+          <tr>
+            <td>О'КЕЙ</td>
+            <td>МКПАО</td>
+            <td>Санкт-Петербург</td>
+            <td>2002</td>
+            <td>Розничная торговля</td>
+            <td>310</td>
+            <td>30000</td>
+            <td>350</td>
+          </tr>
+
+          <tr>
+            <td>Акрон</td>
+            <td>ПАО</td>
+            <td>Великий Новгород</td>
+            <td>1992</td>
+            <td>Химическая промышленность</td>
+            <td>300</td>
+            <td>16000</td>
+            <td>650</td>
+          </tr>
+
+          <tr>
+            <td>Совкомфлот</td>
+            <td>ПАО</td>
+            <td>Санкт-Петербург</td>
+            <td>1988</td>
+            <td>Морской транспорт</td>
+            <td>290</td>
+            <td>9000</td>
+            <td>700</td>
+          </tr>
+
+          <tr>
+            <td>Novabev Group</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1999</td>
+            <td>Пищевая промышленность</td>
+            <td>280</td>
+            <td>15000</td>
+            <td>300</td>
+          </tr>
+
+          <tr>
+            <td>FESCO</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1880</td>
+            <td>Логистика и транспорт</td>
+            <td>270</td>
+            <td>20000</td>
+            <td>500</td>
+          </tr>
+
+          <tr>
+            <td>М.Видео-Эльдорадо</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1993</td>
+            <td>Розничная торговля</td>
+            <td>260</td>
+            <td>30000</td>
+            <td>350</td>
+          </tr>
+
+          <tr>
+            <td>ПИК</td>
+            <td>ПАО</td>
+            <td>Москва</td>
+            <td>1994</td>
+            <td>Строительство и недвижимость</td>
+            <td>250</td>
+            <td>30000</td>
+            <td>700</td>
+          </tr>
+        </tbody>
       </table>
     </main>
-    <footer align="center">
-      <hr width="80%" align="center" />
-      <p>
-        <b>© 2026 Норин</b><br />
-        Б9124-09.03.04 (1)<br />
-        <i>Вся информация взята из открытых источников</i>
-      </p>
+
+    <footer>
+      <div align="center">
+        <hr width="80%" align="center">
+        <p>
+          <b>© 2026 Норин</b><br>
+          Б9124-09.03.04 (1)<br>
+          <i>Вся информация взята из открытых источников</i>
+        </p>
+      </div>
     </footer>
   </body>
 </html>
